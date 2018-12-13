@@ -1,12 +1,12 @@
 {
     "name": "carropublic/discussion",
-    "description": ":description",
+    "description": "Discussion like a Todo List ✅",
     "license": "license",
     "authors": [
         {
-            "name": "author name",
-            "email": "author email",
-            "homepage": "author homepage"
+            "name": "Universe",
+            "email": "universe@carro.co",
+            "homepage": "https://carro.sg"
         }
     ],
     "homepage": "https://github.com/carropublic/discussion",
