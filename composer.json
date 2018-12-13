@@ -1,0 +1,43 @@
+{
+    "name": "carropublic/discussion",
+    "description": ":description",
+    "license": "license",
+    "authors": [
+        {
+            "name": "author name",
+            "email": "author email",
+            "homepage": "author homepage"
+        }
+    ],
+    "homepage": "https://github.com/carropublic/discussion",
+    "keywords": ["Laravel", "Discussion"],
+    "require": {
+        "illuminate/support": "~5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "~3.0",
+        "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CarroPublic\\Discussion\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CarroPublic\\Discussion\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CarroPublic\\Discussion\\DiscussionServiceProvider"
+            ],
+            "aliases": {
+                "Discussion": "CarroPublic\\Discussion\\Facades\\Discussion"
+            }
+        }
+    }
+}
