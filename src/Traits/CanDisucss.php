@@ -6,6 +6,6 @@ trait CanDisucss
 {
     public function discussionNeedApproval($model): bool
     {
-        return true;
+        return false;
     }
 }

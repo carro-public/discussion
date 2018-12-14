@@ -13,17 +13,17 @@ trait HasDiscussion
         return $this->morphMany(config('discussion.disucssion_class'), 'discussable');
     }
 
-    public function disucssion(string $disucssion)
+    public function discussion(string $discussion)
     {
-        return $this->discussAsUser(auth()->user(), $disucssion);
+        return $this->discussAsUser(auth()->user(), $discussion);
     }
 
-    public function discussAsUser(?Model $user, string $disucssion)
+    public function discussAsUser(?Model $user, string $discussion)
     {
-        $discussableClass = config('discussion.disucssion_class');
+        $discussableClass = config('discussion.discussion_class');
 
         $discussionTopic = new $discussableClass([
-            'discussions' => $disucssion,
+            'discussions' => $discussion,
             'is_approved' => ($user instanceof DirectDiscussable) ? ! $user->discussionNeedApproval($this) : false,
             'user_id' => is_null($user) ? null : $user->getKey(),
             'commentable_id' => $this->getKey(),

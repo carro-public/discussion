@@ -27,6 +27,11 @@ class Discussion extends Model
         return $query->where('is_approved', true);
     }
 
+    public function scopeDisapproved($query)
+    {
+        return $query->where('is_approved', false);
+    }
+
     public function discussable()
     {
         return $this->morphTo();

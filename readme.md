@@ -39,16 +39,75 @@ php artisan vendor:publish --provider="CarroPublic\Discussion\DiscussionServiceP
 
 ## Usage
 
+Get lists of discussions which approve. 
+
+```bash
+$post->discussions()->approve()->get()
+```
+
+Get lists of discussions which got disapprove. 
+
+```bash
+$post->discussions()->disApproved()->get()
+```
+
+Get lists of discussions for both approve and disapprove.
+
+```bash
+$post->discussions
+```
 
 ### Register the Model
 
-In order to use the discussion, you have to register.
+In order to receive/retrieve discussions from the specific model, add the `HasDiscussion` trait to the model class. In our case we choose `Post` as main discussion.
+
+``` php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use CarroPublic\Discussion\Traits\HasDiscussion;
+
+class Post extends Model
+{
+    use HasDiscussion;
+    ...
+}
+```
 
 ### Create Discussions
 
-### DisApprove Discussion
+To create a discussion to your discussable models (in this case Post model), you can use `discussion` method like the following.
 
-### Disable Auto Approve
+``` php
+$post = Post::find(1);
+$post->discussion('Hello World! This is a discussion');
+```
+
+You can also use `discussAsUser` method which need to pass the user object. See example in the following.
+
+``` php
+$user = User::find(1);
+$post->discussAsUser($user, 'Hi! This is a simple discussion');
+```
+
+### Retrieving Discussion
+
+After you finish creating discussion, You can retrieve all your discussion like the following.
+
+``` php
+$post->discussions
+
+```
+
+You can filter only by approve or disapprove like the following.
+
+``` php
+#For approve discussion
+$post->discussions()->approved()->get();
+
+#For disapprove discussion
+$post->discussions()->disApproved()->get();
+```
 
 ## Change log
 
@@ -70,8 +129,11 @@ If you discover any security related issues, please email author email instead o
 
 ## Credits
 
-- [author name][link-author]
+- [Carro][link-author]
 - [All Contributors][link-contributors]
+- [Laravel Comment][link-laravel-comment-package]
+
+Take Lots of reference from [Laravel Comment][link-laravel-comment-package] package. And modify base on what our need.
 
 ## License
 
@@ -86,3 +148,4 @@ license. Please see the [license file](license.md) for more information.
 [link-downloads]: https://packagist.org/packages/carropublic/discussion
 [link-author]: https://github.com/carropublic
 [link-contributors]: ../../contributors]
+[link-laravel-comment-package]: https://github.com/beyondcode/laravel-comments
