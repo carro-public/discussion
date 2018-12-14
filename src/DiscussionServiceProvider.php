@@ -15,7 +15,6 @@ class DiscussionServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
@@ -60,7 +59,8 @@ class DiscussionServiceProvider extends ServiceProvider
 
         if (! class_exists('CreateCommentsTable')) {
             $this->publishes([
-                __DIR__.'/../database/migrations/create_disucssion_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_discussion_table.php'),
+                __DIR__.'/../database/migrations/create_discussions_table.php.stub' =>
+                database_path('migrations/'.date('Y_m_d_His', time()).'_create_discussions_table.php'),
             ], 'migrations');
         }
     }

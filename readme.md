@@ -3,7 +3,11 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
+![Overview explanation of how this package work with image.](example.png)
+
+Discussion is nested discussion with approve/disapprove feature. Discussion inside the discussion, like the above image.
+
+Take a look at [contributing.md](contributing.md) to see a to do list.
 
 ## Installation
 
@@ -13,7 +17,38 @@ Via Composer
 $ composer require carropublic/discussion
 ```
 
+The package will automatically register itself.
+
+You can publish the migration with:
+
+```bash
+php artisan vendor:publish --provider="CarroPublic\Discussion\DiscussionServiceProvider" --tag="migrations"
+```
+
+After the migration has been published you can create the media-table by running the migrations:
+
+```bash
+php artisan migrate
+```
+
+You can publish the config-file with:
+
+```bash
+php artisan vendor:publish --provider="CarroPublic\Discussion\DiscussionServiceProvider" --tag="config"
+```
+
 ## Usage
+
+
+### Register the Model
+
+In order to use the discussion, you have to register.
+
+### Create Discussions
+
+### DisApprove Discussion
+
+### Disable Auto Approve
 
 ## Change log
 

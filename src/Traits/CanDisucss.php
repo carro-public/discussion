@@ -4,8 +4,8 @@ namespace CarroPublic\Discussion\Traits;
 
 trait CanDisucss
 {
-	public function discussionNeedApproval($model): bool
-	{
-		return true;
-	}
+    public function discussionNeedApproval($model): bool
+    {
+        return true;
+    }
 }

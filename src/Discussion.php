@@ -4,16 +4,21 @@ namespace CarroPublic\Discussion;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use CarroPublic\Discussion\Traits\HasDiscussion;
 
 class Discussion extends Model
 {
-	protected $fillable = [
-		'discussion',
-		'user_id',
-		'is_approved'
-	];
+    use HasDiscussion;
 
-	protected $casts = [
+    protected $fillable = [
+        'discussion',
+        'is_approved',
+        'user_id',
+        'discussable_id',
+        'discussable_type',
+    ];
+
+    protected $casts = [
         'is_approved' => 'boolean'
     ];
 

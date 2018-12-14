@@ -1,10 +1,9 @@
 <?php
 
-namespace BeyondCode\Comments\Traits;
-
+namespace CarroPublic\Discussion\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use BeyondCode\Comments\Contracts\DirectDiscussable;
+use CarroPublic\Discussion\Contracts\DirectDiscussable;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasDiscussion
