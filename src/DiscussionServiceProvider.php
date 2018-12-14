@@ -13,10 +13,7 @@ class DiscussionServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'carropublic');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'carropublic');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
@@ -61,22 +58,10 @@ class DiscussionServiceProvider extends ServiceProvider
             __DIR__.'/../config/discussion.php' => config_path('discussion.php'),
         ], 'discussion.config');
 
-        // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/carropublic'),
-        ], 'discussion.views');*/
-
-        // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/carropublic'),
-        ], 'discussion.views');*/
-
-        // Publishing the translation files.
-        /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/carropublic'),
-        ], 'discussion.views');*/
-
-        // Registering package commands.
-        // $this->commands([]);
+        if (! class_exists('CreateCommentsTable')) {
+            $this->publishes([
+                __DIR__.'/../database/migrations/create_disucssion_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_discussion_table.php'),
+            ], 'migrations');
+        }
     }
 }
