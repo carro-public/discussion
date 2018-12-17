@@ -20,11 +20,11 @@ trait HasDiscussion
 
     public function discussAsUser(?Model $user, string $discussion)
     {
-        $discussableClass = config('discussion.discussion_class');
+        $discussableClass = config('discussion.disucssion_class');
 
         $discussionTopic = new $discussableClass([
-            'discussions' => $discussion,
-            'is_approved' => ($user instanceof DirectDiscussable) ? ! $user->discussionNeedApproval($this) : false,
+            'discussion' => $discussion,
+            'is_approved' => ($user instanceof DirectDiscussable) ? ! $user->discussionNeedApproval($this) : true,
             'user_id' => is_null($user) ? null : $user->getKey(),
             'commentable_id' => $this->getKey(),
             'commentable_type' => get_class(),
