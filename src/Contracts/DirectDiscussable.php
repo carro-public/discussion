@@ -2,7 +2,7 @@
 
 namespace CarroPublic\Discussion\Contracts;
 
-interfact DirectDiscussable
+interface DirectDiscussable
 {
     /**
      * Check discussion need approval or not
