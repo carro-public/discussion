@@ -10,7 +10,7 @@ trait HasDiscussion
 {
     public function discussions()
     {
-        return $this->morphMany(config('discussion.disucssion_class'), 'discussable');
+        return $this->morphMany(config('discussion.discussion_class'), 'discussable');
     }
 
     public function discussion(string $discussion)
@@ -20,7 +20,7 @@ trait HasDiscussion
 
     public function discussAsUser(?Model $user, string $discussion)
     {
-        $discussableClass = config('discussion.disucssion_class');
+        $discussableClass = config('discussion.discussion_class');
 
         $discussionTopic = new $discussableClass([
             'discussion' => $discussion,

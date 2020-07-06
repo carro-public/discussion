@@ -2,7 +2,7 @@
 
 namespace CarroPublic\Discussion\Traits;
 
-trait CanDisucss
+trait CanDiscuss
 {
     public function discussionNeedApproval($model): bool
     {
