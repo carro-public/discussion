@@ -147,5 +147,5 @@ license. Please see the [license file](license.md) for more information.
 [link-packagist]: https://packagist.org/packages/carropublic/discussion
 [link-downloads]: https://packagist.org/packages/carropublic/discussion
 [link-author]: https://github.com/carropublic
-[link-contributors]: ../../contributors]
+[link-contributors]: ../../contributors
 [link-laravel-comment-package]: https://github.com/beyondcode/laravel-comments
