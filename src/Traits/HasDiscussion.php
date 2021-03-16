@@ -26,8 +26,6 @@ trait HasDiscussion
             'discussion' => $discussion,
             'is_approved' => ($user instanceof DirectDiscussable) ? ! $user->discussionNeedApproval($this) : true,
             'user_id' => is_null($user) ? null : $user->getKey(),
-            'commentable_id' => $this->getKey(),
-            'commentable_type' => get_class(),
         ]);
 
         return $this->discussions()->save($discussionTopic);
