@@ -15,7 +15,7 @@ trait HasDiscussion
 
     public function discussion(string $discussion, array $taggedUserIds = [])
     {
-        return $this->discussAsUser(auth()->user(), $discussion);
+        return $this->discussAsUser(auth()->user(), $discussion, $taggedUserIds);
     }
 
     public function discussAsUser(?Model $user, string $discussion, array $taggedUserIds = [])
