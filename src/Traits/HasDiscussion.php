@@ -13,12 +13,12 @@ trait HasDiscussion
         return $this->morphMany(config('discussion.discussion_class'), 'discussable');
     }
 
-    public function discussion(string $discussion)
+    public function discussion(string $discussion, array $taggedUserIds = [])
     {
-        return $this->discussAsUser(auth()->user(), $discussion);
+        return $this->discussAsUser(auth()->user(), $discussion, $taggedUserIds);
     }
 
-    public function discussAsUser(?Model $user, string $discussion)
+    public function discussAsUser(?Model $user, string $discussion, array $taggedUserIds = [])
     {
         $discussableClass = config('discussion.discussion_class');
 
@@ -28,6 +28,7 @@ trait HasDiscussion
             'user_id' => is_null($user) ? null : $user->getKey(),
             'commentable_id' => $this->getKey(),
             'commentable_type' => get_class(),
+            'tagged_user_id' => !empty($taggedUserIds) ? json_encode($taggedUserIds) : null,
         ]);
 
         return $this->discussions()->save($discussionTopic);
