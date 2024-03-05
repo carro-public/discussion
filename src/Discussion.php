@@ -17,11 +17,13 @@ class Discussion extends Model
         'discussable_id',
         'discussable_type',
         'tagged_user_id',
+        'read_user_id',
     ];
 
     protected $casts = [
         'is_approved' => 'boolean',
         'tagged_user_id' => 'json',
+        'read_user_id' => 'json',
     ];
 
     public function scopeApproved($query)
@@ -51,6 +53,37 @@ class Discussion extends Model
         ]);
 
         return $this;
+    }
+
+    /**
+     * Update the discussion as read by the user.
+     *
+     * @param int $userId
+     *
+     * @return $this
+     */
+    public function readByUserId($userId)
+    {
+        $readUserIds = $this->read_user_id ?? [];
+        $readUserIds[] = $userId;
+
+        $this->update([
+            'read_user_id' => array_unique($readUserIds),
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * Check if the discussion is read by the user.
+     *
+     * @param int $userId
+     *
+     * @return bool
+     */
+    public function isReadByUserId($userId)
+    {
+        return in_array($userId, $this->read_user_id ?? []);
     }
 
     protected function getAuthModelName()
