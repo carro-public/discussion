@@ -64,7 +64,7 @@ class Discussion extends Model
      */
     public function readByUserId($userId)
     {
-        $readUserIds = $this->read_user_id ?? [];
+        $readUserIds = !empty($this->read_user_id) ? json_decode($this->read_user_id, true) : [];
         $readUserIds[] = $userId;
 
         $this->update([
@@ -83,7 +83,7 @@ class Discussion extends Model
      */
     public function isReadByUserId($userId)
     {
-        return in_array($userId, $this->read_user_id ?? []);
+        return in_array($userId, !empty($this->read_user_id) ? json_decode($this->read_user_id, true) : []);
     }
 
     protected function getAuthModelName()
