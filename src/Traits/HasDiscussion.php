@@ -29,6 +29,7 @@ trait HasDiscussion
             'commentable_id' => $this->getKey(),
             'commentable_type' => get_class(),
             'tagged_user_id' => !empty($taggedUserIds) ? json_encode($taggedUserIds) : null,
+            'read_user_id' => is_null($user) ? null : json_encode([$user->getKey()]),
         ]);
 
         return $this->discussions()->save($discussionTopic);
