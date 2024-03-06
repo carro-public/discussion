@@ -66,14 +66,31 @@ class Discussion extends Model
      */
     public function readByUserId($userId)
     {
-        $readUserIds = !empty($this->read_user_id) ? json_decode($this->read_user_id, true) : [];
+        $readUserIds = $this->getReadUserIds();
         $readUserIds[] = $userId;
 
         $this->update([
-            'read_user_id' => array_unique($readUserIds),
+            'read_user_id' => json_encode(array_unique($readUserIds)),
         ]);
 
         return $this;
+    }
+
+    private function getReadUserIds()
+    {
+        if (is_null($this->read_user_id)) {
+            return [];
+        }
+
+        if (is_array($this->read_user_id)) {
+            return $this->read_user_id;
+        }
+
+        if (is_string($this->read_user_id)) {
+            return json_decode($this->read_user_id, true);
+        }
+
+        return [];
     }
 
     /**
@@ -85,7 +102,7 @@ class Discussion extends Model
      */
     public function isReadByUserId($userId)
     {
-        return in_array($userId, !empty($this->read_user_id) ? json_decode($this->read_user_id, true) : []);
+        return in_array($userId, $this->getReadUserIds());
     }
 
     protected function getAuthModelName()
