@@ -18,12 +18,14 @@ class Discussion extends Model
         'discussable_type',
         'tagged_user_id',
         'read_user_id',
+        'additional_data',
     ];
 
     protected $casts = [
         'is_approved' => 'boolean',
         'tagged_user_id' => 'json',
         'read_user_id' => 'json',
+        'additional_data' => 'json',
     ];
 
     public function scopeApproved($query)
