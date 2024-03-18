@@ -149,3 +149,4 @@ license. Please see the [license file](license.md) for more information.
 [link-author]: https://github.com/carropublic
 [link-contributors]: ../../contributors]
 [link-laravel-comment-package]: https://github.com/beyondcode/laravel-comments
+-

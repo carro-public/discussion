@@ -16,10 +16,16 @@ class Discussion extends Model
         'user_id',
         'discussable_id',
         'discussable_type',
+        'tagged_user_id',
+        'read_user_id',
+        'additional_data',
     ];
 
     protected $casts = [
-        'is_approved' => 'boolean'
+        'is_approved' => 'boolean',
+        'tagged_user_id' => 'json',
+        'read_user_id' => 'json',
+        'additional_data' => 'json',
     ];
 
     public function scopeApproved($query)
@@ -49,6 +55,54 @@ class Discussion extends Model
         ]);
 
         return $this;
+    }
+
+    /**
+     * Update the discussion as read by the user.
+     *
+     * @param int $userId
+     *
+     * @return $this
+     */
+    public function readByUserId($userId)
+    {
+        $readUserIds = $this->getReadUserIds();
+        $readUserIds[] = $userId;
+
+        $this->update([
+            'read_user_id' => json_encode(array_unique($readUserIds)),
+        ]);
+
+        return $this;
+    }
+
+    private function getReadUserIds()
+    {
+        if (is_null($this->read_user_id)) {
+            return [];
+        }
+
+        if (is_array($this->read_user_id)) {
+            return $this->read_user_id;
+        }
+
+        if (is_string($this->read_user_id)) {
+            return json_decode($this->read_user_id, true);
+        }
+
+        return [];
+    }
+
+    /**
+     * Check if the discussion is read by the user.
+     *
+     * @param int $userId
+     *
+     * @return bool
+     */
+    public function isReadByUserId($userId)
+    {
+        return in_array($userId, $this->getReadUserIds());
     }
 
     protected function getAuthModelName()
